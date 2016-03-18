@@ -1,0 +1,26 @@
+#if($package)
+package ${package};
+
+#end
+import java.util.List;
+import java.util.Map;
+import org.apache.ibatis.session.RowBounds;
+
+/**
+ * @since ${since}
+ * @author ${author}
+ */
+public interface ${table.classNameDefine}Mapper {
+
+	void insert${table.classNameDefine}(${table.classNameDefine} ${table.humpName});
+	
+	void delete${table.classNameDefine}(${table.primaryKeyType} ${table.primaryKey.humpName});
+	
+	void update${table.classNameDefine}(${table.classNameDefine} ${table.humpName});
+	
+	${table.classNameDefine} select${table.classNameDefine}By${table.primaryKey.firtLetterUpCaseName}(${table.primaryKeyType} ${table.primaryKey.humpName});
+	
+	List<${table.classNameDefine}> select${table.classNameDefine}List(Map<String,Object> params,RowBounds bounds);
+	
+	int select${table.classNameDefine}Count(Map<String,Object> params);
+}

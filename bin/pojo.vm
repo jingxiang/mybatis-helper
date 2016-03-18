@@ -1,0 +1,38 @@
+#if($package)
+package ${package};
+
+#end
+#foreach($impClazz in ${table.importClasses})
+import $impClazz;
+#end
+
+/**
+ * @since ${since}
+ * @author ${author}
+ */
+public class ${table.classNameDefine}{
+
+#foreach($field in ${table.fields})
+#if(${field.remark} && ${field.remark}!="")
+	/** ${field.remark} */
+#end
+	private ${field.javaType} ${field.humpName};
+#end
+
+#foreach($field in ${table.fields})
+#if(${field.remark} && ${field.remark}!="")
+	/** getter ${field.remark} */
+#end
+	public ${field.javaType} get${field.firtLetterUpCaseName}() {
+		return ${field.humpName};
+	}
+	
+#if(${field.remark} && ${field.remark}!="")
+	/** setter ${field.remark} */
+#end
+	public void set${field.firtLetterUpCaseName}(${field.javaType} ${field.humpName}) {
+		this.${field.humpName} = ${field.humpName};
+	}
+	
+#end
+}

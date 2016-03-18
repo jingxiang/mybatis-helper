@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="$!{package}.${table.classNameDefine}Mapper">
+
+	<sql id="queryFields">
+    #foreach($field in ${table.fields})
+    ${field.name} as ${field.humpName} #if($velocityCount != $table.fields.size()),
+    #end #end
+
+	</sql>
+	
+	<select id="select${table.classNameDefine}By${table.primaryKey.firtLetterUpCaseName}" resultType="${table.classNameDefine}">
+		select 
+			<include refid="queryFields"/>
+		from 
+			${table.name} 
+		where 
+			${table.primaryKey.name}=#{${table.primaryKey.humpName}}
+	</select>
+	
+	<select id="select${table.classNameDefine}List" resultType="${table.classNameDefine}">
+		select 
+			<include refid="queryFields"/>
+		from 
+			${table.name} 
+		where 
+			${table.primaryKey.name}=#{${table.primaryKey.humpName}}
+		order by gmt_create desc
+	</select>
+	
+	<select id="select${table.classNameDefine}Count" resultType="int">
+		select 
+			count(*)
+		from 
+			${table.name} 
+		where 
+			${table.primaryKey.name}=#{${table.primaryKey.humpName}}
+	</select>
+	
+	<insert id="insert${table.classNameDefine}" parameterType="${table.classNameDefine}" keyProperty="${table.primaryKey.humpName}" useGeneratedKeys="true">
+		${table.insertSQL} 
+	</insert>
+	
+	<delete id="delete${table.classNameDefine}">
+		delete from ${table.name} where ${table.primaryKey.name}=#{${table.primaryKey.humpName}}
+	</delete>
+	
+	<update id="update${table.classNameDefine}" parameterType="${table.classNameDefine}">
+		update 
+			${table.name} 
+		set 
+	#foreach($field in ${table.fields})
+		${field.name} = #{${field.humpName}} #if($velocityCount != $table.fields.size()),
+	#end
+#end
+		
+		where
+			${table.primaryKey.name}=#{${table.primaryKey.humpName}}
+	</update>
+
+</mapper>
