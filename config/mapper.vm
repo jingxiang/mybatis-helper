@@ -1,15 +1,19 @@
-#if($package)
-package ${package};
+#if($mapperPackage)
+package ${mapperPackage};
 
 #end
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
+#if("$anotation" == "true")import org.apache.ibatis.annotations.Mapper;#end
 
 /**
  * @since ${since}
  * @author ${author}
  */
+
+#if("$anotation" == "true")@Mapper#end
+
 public interface ${table.classNameDefine}Mapper {
 
 	void insert${table.classNameDefine}(${table.classNameDefine} ${table.humpName});

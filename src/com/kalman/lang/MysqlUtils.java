@@ -19,7 +19,7 @@ import com.kalman.domain.Table;
  */
 public class MysqlUtils {
 
-	private static Connection getConnection(String connectionUrl) {
+	public static Connection getConnection(String connectionUrl) {
 		try {
 			return DriverManager.getConnection(connectionUrl);
 		} catch (SQLException e) {

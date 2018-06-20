@@ -1,5 +1,5 @@
-#if($package)
-package ${package};
+#if($pojoPackage)
+package ${pojoPackage};
 
 #end
 #foreach($impClazz in ${table.importClasses})
